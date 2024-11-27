@@ -16,7 +16,7 @@ fi
 
 if [[ -z $ELEMENT ]]
 then
-  echo "I could not find that element in the database"
+  echo "I could not find that element in the database."
 else
   # atomic_number, symbol, name, type... 
   ELEMENT_INFO=$($PSQL "SELECT atomic_number, name, symbol, type, atomic_mass, melting_point_celsius, boiling_point_celsius
