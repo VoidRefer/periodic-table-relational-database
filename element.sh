@@ -5,7 +5,15 @@ if [ -z "$1" ]; then
     echo "Please provide an element as an argument." 
     exit 0 
 fi 
-ELEMENT=$($PSQL "SELECT atomic_number FROM elements WHERE atomic_number=$1 OR symbol='$1' OR name='$1';")
+
+# Check if the input is a number
+if [[ $1 =~ ^[0-9]+$ ]]
+then
+  ELEMENT=$($PSQL "SELECT atomic_number FROM elements WHERE atomic_number=$1;")
+else
+  ELEMENT=$($PSQL "SELECT atomic_number FROM elements WHERE symbol='$1' OR name='$1';")
+fi
+
 if [[ -z $ELEMENT ]]
 then
   echo "I could not find that element in the database"
